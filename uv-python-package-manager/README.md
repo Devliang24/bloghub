@@ -1,6 +1,6 @@
-# UV Tutorial Blog
+# UV Python Package Manager
 
-一个使用 UV Python 包管理器构建的教程博客系统，专注于 UV 的快速入门和实战应用。
+UV Python 包管理器完整教程和实战项目，包含快速入门指南、清华大学镜像源配置和 FastAPI 实战示例。
 
 ## 🚀 项目特点
 
@@ -13,21 +13,33 @@
 ## 📁 项目结构
 
 ```
-myblog/
-├── content/                 # 文章内容目录
+uv-python-package-manager/
+├── content/                 # 教程内容目录
 │   └── tutorials/
 │       └── uv/
-│           └── getting-started.md
+│           └── getting-started.md    # 完整的 UV 快速入门教程
+├── docs/                    # 技术文档和报告
+│   └── INSTALLATION_REPORT.md      # UV 安装验证报告
+├── examples/                # 实战项目示例
+│   └── fastapi-demo/
+│       └── README.md              # FastAPI + UV 实战教程
 ├── static/                  # 静态资源
 │   ├── css/
-│   │   └── style.css
+│   │   └── style.css               # 响应式 CSS 样式
 │   └── js/
 ├── templates/               # HTML 模板
+│   ├── base.html                  # 基础模板
+│   ├── index.html                 # 首页模板
+│   └── article.html               # 文章模板
 ├── scripts/                 # Python 脚本
-│   └── generate_blog.py
+│   └── generate_blog.py           # 静态博客生成器
 ├── public/                  # 生成的静态网站
-├── pyproject.toml          # 项目配置和依赖管理
-└── README.md
+│   ├── index.html                 # 博客首页
+│   ├── static/                    # 复制的静态资源
+│   └── tutorials/                 # 生成的教程页面
+├── pyproject.toml          # 项目配置和依赖管理（UV 配置）
+├── uv.lock                 # UV 依赖锁定文件
+└── README.md              # 本项目说明文档
 ```
 
 ## 🛠️ 环境要求
@@ -58,12 +70,10 @@ mkdir -p ~/.config/uv
 echo 'index-url = "https://pypi.tuna.tsinghua.edu.cn/simple/"' > ~/.config/uv/uv.toml
 ```
 
-### 3. 克隆项目并安装依赖
+### 3. 安装依赖
 
 ```bash
-git clone https://github.com/Devliang24/myblog.git
-cd myblog
-
+# 如果是克隆的仓库，确保在当前目录
 # 使用 UV 安装依赖
 uv sync
 ```
@@ -158,13 +168,25 @@ uv run pytest --cov=scripts --cov-report=html
 - ✅ 静态文件管理
 - ✅ 目录索引生成
 
-### UV 教程内容
+### UV 教程内容 (`content/tutorials/uv/getting-started.md`)
 
-- ✅ UV 安装指南
-- ✅ 清华镜像源配置
-- ✅ FastAPI 实战示例
-- ✅ 常用命令速查
-- ✅ 问题解决方案
+- ✅ UV 安装指南（多种安装方法）
+- ✅ 清华大学镜像源配置（全局、项目级）
+- ✅ FastAPI 实战示例（完整项目演示）
+- ✅ 常用命令速查表（项目管理、包管理）
+- ✅ 问题解决方案（网络、依赖、环境问题）
+
+### 技术文档 (`docs/`)
+
+- ✅ UV 安装验证报告（基于实际系统测试）
+- ✅ 性能对比分析（UV vs pip）
+- ✅ 配置最佳实践
+
+### 实战示例 (`examples/`)
+
+- ✅ FastAPI + UV 完整项目示例
+- ✅ 部署和运维指南
+- ✅ Docker 容器化示例
 
 ## 🎨 自定义
 
@@ -186,7 +208,7 @@ uv run pytest --cov=scripts --cov-report=html
 
 1. 将代码推送到 GitHub 仓库
 2. 在仓库设置中启用 GitHub Pages
-3. 选择 `public` 目录作为源
+3. 选择 `uv-python-package-manager/public` 目录作为源
 
 ### 手动部署
 
