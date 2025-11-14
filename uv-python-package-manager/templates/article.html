@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block description %}{{ description }}{% endblock %}
+
+{% block content %}
+<article>
+    <div class="article-header">
+        <div class="article-meta">
+            <div class="meta-item">📅 <time datetime="{{ date }}">{{ date }}</time></div>
+            <div class="meta-item">✍️ {{ author }}</div>
+            <div class="meta-item">📁 {{ category }}</div>
+            <div class="meta-item">⏱️ {{ reading_time }} 分钟阅读</div>
+        </div>
+        <h1 class="article-title">{{ title }}</h1>
+        {% if description %}
+        <p class="article-subtitle">{{ description }}</p>
+        {% endif %}
+    </div>
+
+    <div class="article-content">
+        {{ content|safe }}
+
+        {% if tags %}
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+            <h3>🏷️ 标签</h3>
+            <div style="margin-top: 1rem;">
+                {% for tag in tags %}
+                <span style="background: #e3f2fd; color: #1976d2; padding: 0.4rem 0.8rem; border-radius: 16px; font-size: 0.9rem; margin-right: 0.5rem; margin-bottom: 0.5rem; display: inline-block;">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+            <h3>🔗 相关链接</h3>
+            <ul>
+                <li><a href="/">返回首页</a></li>
+                <li><a href="https://docs.astral.sh/uv/" target="_blank">UV 官方文档</a></li>
+                <li><a href="https://github.com/astral-sh/uv" target="_blank">UV GitHub 仓库</a></li>
+                <li><a href="https://pypi.tuna.tsinghua.edu.cn/" target="_blank">清华大学 PyPI 镜像</a></li>
+            </ul>
+        </div>
+    </div>
+</article>
+
+<style>
+.copy-button:hover {
+    background: #45a049 !important;
+}
+</style>
+{% endblock %}
