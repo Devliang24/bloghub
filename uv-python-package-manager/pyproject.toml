@@ -1,7 +1,7 @@
 [project]
-name = "uv-python-package-manager"
+name = "uv-tutorial-blog"
 version = "0.1.0"
-description = "UV Python包管理器完整教程和实战项目"
+description = "UV Python包管理器快速入门教程博客系统"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }

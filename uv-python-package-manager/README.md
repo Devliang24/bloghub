@@ -1,6 +1,6 @@
-# UV Python Package Manager
+# UV Tutorial Blog
 
-UV Python 包管理器完整教程和实战项目，包含快速入门指南、清华大学镜像源配置和 FastAPI 实战示例。
+一个使用 UV Python 包管理器构建的教程博客系统，专注于 UV 的快速入门和实战应用。
 
 ## 🚀 项目特点
 

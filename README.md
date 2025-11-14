@@ -1,232 +1,56 @@
-# UV Tutorial Blog
+# Blog Hub
 
-一个使用 UV Python 包管理器构建的教程博客系统，专注于 UV 的快速入门和实战应用。
-
-## 🚀 项目特点
-
-- **超快的包管理**：使用 UV 替代传统的 pip，享受 10-100 倍的速度提升
-- **国内源优化**：配置清华大学镜像源，解决国内网络访问问题
-- **现代 Python 工具链**：使用 pyproject.toml 和现代 Python 开发最佳实践
-- **响应式设计**：支持桌面和移动设备的友好界面
-- **Markdown 支持**：使用 Markdown 编写文章，支持语法高亮和 TOC
+一个整合了多个技术博客和教程的项目仓库。
 
 ## 📁 项目结构
 
 ```
-myblog/
-├── content/                 # 文章内容目录
-│   └── tutorials/
-│       └── uv/
-│           └── getting-started.md
-├── static/                  # 静态资源
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-├── templates/               # HTML 模板
-├── scripts/                 # Python 脚本
-│   └── generate_blog.py
-├── public/                  # 生成的静态网站
-├── pyproject.toml          # 项目配置和依赖管理
-└── README.md
+bloghub/
+├── uv-python-package-manager/    # UV Python包管理器教程
+└── ...                          # 更多项目即将添加
 ```
 
-## 🛠️ 环境要求
+## 🚀 当前项目
 
-- Python 3.8+
-- UV 包管理器
-- Git
+### UV Python Package Manager
 
-## 📦 安装和设置
+完整的 UV Python 包管理器学习和实战项目，包含：
 
-### 1. 安装 UV
+- 📖 详细教程：从安装到实战的完整指南
+- 🔧 配置指南：清华大学镜像源配置
+- 💻 实战示例：FastAPI 项目演示
+- 📊 性能对比：UV vs pip 的详细对比
+- 🎯 国内优化：针对中国用户的特殊配置
+
+#### 快速开始
 
 ```bash
-# 使用 pip 安装（推荐）
-pip install uv
+# 进入 UV 项目
+cd uv-python-package-manager
 
-# 或者使用官方脚本
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-### 2. 配置清华大学镜像源
-
-```bash
-# 创建配置目录
-mkdir -p ~/.config/uv
-
-# 配置清华镜像源
-echo 'index-url = "https://pypi.tuna.tsinghua.edu.cn/simple/"' > ~/.config/uv/uv.toml
-```
-
-### 3. 克隆项目并安装依赖
-
-```bash
-git clone https://github.com/Devliang24/myblog.git
-cd myblog
-
-# 使用 UV 安装依赖
-uv sync
-```
-
-## 🚀 快速开始
-
-### 1. 创建模板文件
-
-```bash
-uv run python scripts/generate_blog.py --create-templates
-```
-
-### 2. 生成博客
-
-```bash
-uv run python scripts/generate_blog.py
-```
-
-### 3. 启动本地服务器
-
-```bash
-cd public
-python -m http.server 8000
-```
-
-然后访问 `http://localhost:8000` 查看博客。
-
-## 📝 编写文章
-
-1. 在 `content/` 目录下创建 Markdown 文件
-2. 使用标准的 Markdown 格式编写内容
-3. 可以在文件开头添加 YAML 前置元数据：
-
-```markdown
----
-title: "文章标题"
-description: "文章描述"
-date: "2025-01-15"
-author: "作者名"
-tags: ["标签1", "标签2"]
-category: "分类"
----
-
-# 文章内容
-
-这里是文章的正文内容...
-```
-
-## 🛠️ 开发
-
-### 添加新依赖
-
-```bash
-# 添加生产依赖
-uv add package_name
-
-# 添加开发依赖
-uv add --dev pytest black flake8
-```
-
-### 代码格式化
-
-```bash
-# 格式化代码
-uv run black .
-
-# 检查代码质量
-uv run flake8 scripts/
-
-# 类型检查
-uv run mypy scripts/
-```
-
-### 运行测试
-
-```bash
-# 运行所有测试
-uv run pytest
-
-# 运行测试并生成覆盖率报告
-uv run pytest --cov=scripts --cov-report=html
-```
-
-## 📚 主要功能
-
-### 博客生成器 (`scripts/generate_blog.py`)
-
-- ✅ 解析 Markdown 文件
-- ✅ 支持前置元数据
-- ✅ 生成 HTML 页面
-- ✅ 响应式模板
-- ✅ 静态文件管理
-- ✅ 目录索引生成
-
-### UV 教程内容
-
-- ✅ UV 安装指南
-- ✅ 清华镜像源配置
-- ✅ FastAPI 实战示例
-- ✅ 常用命令速查
-- ✅ 问题解决方案
-
-## 🎨 自定义
-
-### 修改样式
-
-编辑 `static/css/style.css` 文件来自定义博客的外观。
-
-### 修改模板
-
-在 `templates/` 目录下修改 HTML 模板文件：
-
-- `base.html`: 基础模板
-- `index.html`: 首页模板
-- `article.html`: 文章模板
-
-## 🚀 部署
-
-### GitHub Pages
-
-1. 将代码推送到 GitHub 仓库
-2. 在仓库设置中启用 GitHub Pages
-3. 选择 `public` 目录作为源
-
-### 手动部署
-
-```bash
-# 生成博客
+# 生成博客网站
 uv run python scripts/generate_blog.py
 
-# 上传 public 目录到服务器
-rsync -av public/ user@server:/var/www/html/
+# 启动本地服务器
+cd public && python -m http.server 8000
+
+# 访问 http://localhost:8000
 ```
+
+## 🔗 相关链接
+
+- **UV 项目主页**: [https://github.com/astral-sh/uv](https://github.com/astral-sh/uv)
+- **UV 官方文档**: [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/)
+- **清华 PyPI 镜像**: [https://pypi.tuna.tsinghua.edu.cn/](https://pypi.tuna.tsinghua.edu.cn/)
 
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
 
-### 贡献指南
-
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
-
 ## 📄 许可证
 
-本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
-
-## 🔗 相关链接
-
-- [UV 官方文档](https://docs.astral.sh/uv/)
-- [UV GitHub 仓库](https://github.com/astral-sh/uv)
-- [清华大学 PyPI 镜像](https://pypi.tuna.tsinghua.edu.cn/)
-- [FastAPI 文档](https://fastapi.tiangolo.com/)
-
-## 🙏 致谢
-
-- [Astral](https://astral.sh/) - 创建了优秀的 UV 包管理器
-- [FastAPI](https://fastapi.tiangolo.com/) - 现代的 Python Web 框架
-- [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/) - 提供快速的 PyPI 镜像服务
+MIT License
 
 ---
 
-> 💡 **小贴士**：如果你在使用过程中遇到问题，可以查看 [UV 官方文档](https://docs.astral.sh/uv/) 或提交 Issue。
+> 💡 提示：各个子项目都是独立的，可以单独使用和学习。
