@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - UV Python包管理器教程</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">🚀 UV Tutorial</a>
+                <nav>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/tutorials/uv/getting-started.html">UV教程</a></li>
+                        <li><a href="https://github.com/astral-sh/uv" target="_blank">GitHub</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article>
+    <div class="article-header">
+        <div class="article-meta">
+            <div class="meta-item">📅 <time datetime="2025-11-22">2025-11-22</time></div>
+            <div class="meta-item">✍️ Devliang24</div>
+            <div class="meta-item">📁 教程</div>
+            <div class="meta-item">⏱️ 16 分钟阅读</div>
+        </div>
+        <h1 class="article-title">Getting Started</h1>
+        
+    </div>
+
+    <div class="article-content">
+        <h1 id="docker">Docker 快速入门教程：容器化技术完全指南</h1>
+<blockquote>
+<p><strong>适合人群</strong>：开发者、运维人员、希望学习容器化技术的初学者
+<strong>前置知识</strong>：基础的 Linux 命令、了解基本的软件开发概念
+<strong>预计时间</strong>：30-40 分钟完成基础学习
+<strong>系统环境</strong>：基于 Docker 28.3.3 + Ubuntu 22.04 LTS</p>
+</blockquote>
+<h2 id="docker_1">🚀 什么是 Docker？</h2>
+<p>Docker 是一个开源的容器化平台，它允许开发者将应用程序及其依赖打包到一个轻量级、可移植的容器中，然后可以在任何支持 Docker 的环境中运行。</p>
+<h3 id="docker_2">💡 Docker 的核心价值</h3>
+<ul>
+<li><strong>一次构建，到处运行</strong>：消除"在我机器上可以运行"的问题</li>
+<li><strong>轻量级</strong>：容器比虚拟机更小、启动更快</li>
+<li><strong>环境一致性</strong>：开发、测试、生产环境完全一致</li>
+<li><strong>资源高效</strong>：共享操作系统内核，节省系统资源</li>
+<li><strong>微服务友好</strong>：非常适合构建和部署微服务架构</li>
+</ul>
+<h3 id="docker-vs">📊 Docker vs 传统虚拟机</h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Docker 容器</th>
+<th>传统虚拟机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>启动速度</strong></td>
+<td>🚀 秒级</td>
+<td>🐢 分钟级</td>
+</tr>
+<tr>
+<td><strong>资源占用</strong></td>
+<td>📉 MB 级别</td>
+<td>📈 GB 级别</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>⚡ 接近原生</td>
+<td>🔋 有性能损耗</td>
+</tr>
+<tr>
+<td><strong>操作系统</strong></td>
+<td>共享宿主机内核</td>
+<td>每个 VM 完整 OS</td>
+</tr>
+<tr>
+<td><strong>隔离性</strong></td>
+<td>进程级别隔离</td>
+<td>完全隔离</td>
+</tr>
+<tr>
+<td><strong>部署密度</strong></td>
+<td>单机可运行上千容器</td>
+<td>单机几十个 VM</td>
+</tr>
+<tr>
+<td><strong>磁盘占用</strong></td>
+<td>轻量级</td>
+<td>重量级</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docker_3">🏗️ Docker 架构图</h3>
+<div class="codehilite"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">TB</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">Docker</span><span class="w"> </span><span class="err">客户端</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">docker</span><span class="w"> </span><span class="err">命令行工具</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">发送请求</span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">Docker</span><span class="w"> </span><span class="err">守护进程</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">dockerd</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">镜像仓库</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">Images</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">运行容器</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">Containers</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">网络配置</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">Networks</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">数据卷</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">Volumes</span><span class="p">]</span>
+<span class="w">    </span><span class="n">G</span><span class="p">[</span><span class="n">Docker</span><span class="w"> </span><span class="n">Hub</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">镜像仓库</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="p">.</span><span class="o">-&gt;|</span><span class="err">拉取镜像</span><span class="o">|</span><span class="w"> </span><span class="n">C</span>
+<span class="w">    </span><span class="n">H</span><span class="p">[</span><span class="err">国内镜像源</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">加速服务</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="p">.</span><span class="o">-&gt;|</span><span class="err">加速拉取</span><span class="o">|</span><span class="w"> </span><span class="n">C</span>
+</code></pre></div>
+
+<p><strong>架构说明</strong>：
+- <strong>Docker 客户端</strong>：用户通过 <code>docker</code> 命令与 Docker 交互
+- <strong>Docker 守护进程</strong>：后台服务，负责管理容器、镜像等
+- <strong>镜像 (Images)</strong>：应用的静态模板
+- <strong>容器 (Containers)</strong>：镜像的运行实例
+- <strong>Docker Hub</strong>：官方镜像仓库，类似 GitHub</p>
+<h2 id="docker_4">🛠️ 安装 Docker</h2>
+<h3 id="ubuntu-2204">Ubuntu 22.04 安装（推荐方式）</h3>
+<h4 id="_1">方法一：使用官方脚本（最简单）</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 下载并执行官方安装脚本</span>
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
+sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
+
+<span class="c1"># 启动 Docker 服务</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
+</code></pre></div>
+
+<h4 id="apt">方法二：使用 APT 仓库（更可控）</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. 更新软件包索引</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+
+<span class="c1"># 2. 安装依赖包</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gnupg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>lsb-release
+
+<span class="c1"># 3. 添加 Docker 官方 GPG 密钥</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/apt/keyrings
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/docker.gpg
+
+<span class="c1"># 4. 设置稳定版仓库</span>
+<span class="nb">echo</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.gpg] \</span>
+<span class="s2">  https://download.docker.com/linux/ubuntu \</span>
+<span class="s2">  </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> stable&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/docker.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+
+<span class="c1"># 5. 安装 Docker Engine</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker-buildx-plugin<span class="w"> </span>docker-compose-plugin
+
+<span class="c1"># 6. 启动 Docker 服务</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
+</code></pre></div>
+
+<h3 id="linux">其他 Linux 发行版</h3>
+<h4 id="centos-rhel">CentOS / RHEL</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 安装依赖</span>
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>yum-utils
+
+<span class="c1"># 添加 Docker 仓库</span>
+sudo<span class="w"> </span>yum-config-manager<span class="w"> </span>--add-repo<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://download.docker.com/linux/centos/docker-ce.repo
+
+<span class="c1"># 安装 Docker</span>
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io
+
+<span class="c1"># 启动服务</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
+</code></pre></div>
+
+<h3 id="macos">macOS 安装</h3>
+<ol>
+<li>下载 <a href="https://www.docker.com/products/docker-desktop">Docker Desktop for Mac</a></li>
+<li>双击 <code>.dmg</code> 文件安装</li>
+<li>启动 Docker Desktop 应用</li>
+<li>等待状态栏图标显示 Docker 正在运行</li>
+</ol>
+<h3 id="windows">Windows 安装</h3>
+<ol>
+<li>确保启用 WSL 2（Windows 10/11）</li>
+<li>下载 <a href="https://www.docker.com/products/docker-desktop">Docker Desktop for Windows</a></li>
+<li>运行安装程序</li>
+<li>重启计算机</li>
+<li>启动 Docker Desktop</li>
+</ol>
+<h3 id="_2">验证安装</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 查看 Docker 版本</span>
+docker<span class="w"> </span>--version
+<span class="c1"># 输出示例：Docker version 28.3.3, build 980b856</span>
+
+<span class="c1"># 查看详细信息</span>
+docker<span class="w"> </span>info
+
+<span class="c1"># 运行测试容器</span>
+docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</code></pre></div>
+
+<h3 id="root-docker">配置非 root 用户使用 Docker（重要）</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 将当前用户添加到 docker 组</span>
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+
+<span class="c1"># 重新登录或执行以下命令使组权限生效</span>
+newgrp<span class="w"> </span>docker
+
+<span class="c1"># 测试是否可以无 sudo 运行</span>
+docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</code></pre></div>
+
+<h2 id="_3">🌐 配置国内镜像源（重点章节）</h2>
+<h3 id="_4">⚠️ 为什么需要配置镜像源？</h3>
+<p>Docker 官方镜像仓库 Docker Hub 位于国外，国内访问速度慢甚至无法访问。配置国内镜像源可以：
+- ✅ 大幅提升镜像拉取速度（从几小时到几分钟）
+- ✅ 避免网络超时和连接失败
+- ✅ 节省带宽和时间成本</p>
+<h3 id="_5">🚀 配置步骤（基于系统实际配置）</h3>
+<h4 id="1-docker">1. 创建或编辑 Docker 配置文件</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 创建配置目录（如果不存在）</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/docker
+
+<span class="c1"># 编辑配置文件</span>
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/docker/daemon.json
+</code></pre></div>
+
+<h4 id="2">2. 添加镜像源配置</h4>
+<p>将以下内容添加到 <code>/etc/docker/daemon.json</code>：</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;registry-mirrors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;http://hub-mirror.c.163.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;https://docker.m.daocloud.io&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>推荐的国内镜像源列表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>镜像源</th>
+<th>地址</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>网易</strong></td>
+<td><code>http://hub-mirror.c.163.com</code></td>
+<td>稳定可靠 ⭐</td>
+</tr>
+<tr>
+<td><strong>DaoCloud</strong></td>
+<td><code>https://docker.m.daocloud.io</code></td>
+<td>速度快 ⭐</td>
+</tr>
+<tr>
+<td><strong>阿里云</strong></td>
+<td><code>https://[你的ID].mirror.aliyuncs.com</code></td>
+<td>需要注册获取</td>
+</tr>
+<tr>
+<td><strong>腾讯云</strong></td>
+<td><code>https://mirror.ccs.tencentyun.com</code></td>
+<td>腾讯用户推荐</td>
+</tr>
+<tr>
+<td><strong>华为云</strong></td>
+<td><code>https://05f073ad3c0010ea0f4bc00b7105ec20.mirror.swr.myhuaweicloud.com</code></td>
+<td>华为用户推荐</td>
+</tr>
+<tr>
+<td><strong>中科大</strong></td>
+<td><code>https://docker.mirrors.ustc.edu.cn</code></td>
+<td>教育网友好</td>
+</tr>
+</tbody>
+</table>
+<p>💡 <strong>小贴士</strong>：可以同时配置多个镜像源，Docker 会按顺序尝试。</p>
+<h4 id="3-docker">3. 重启 Docker 服务</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 重新加载配置</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+
+<span class="c1"># 重启 Docker 服务</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+</code></pre></div>
+
+<h4 id="4">4. 验证配置是否生效</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 查看镜像源配置</span>
+docker<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;Registry Mirrors&quot;</span>
+
+<span class="c1"># 输出示例：</span>
+<span class="c1"># Registry Mirrors:</span>
+<span class="c1">#  http://hub-mirror.c.163.com/</span>
+<span class="c1">#  https://docker.m.daocloud.io/</span>
+</code></pre></div>
+
+<h3 id="_6">📊 镜像拉取流程图</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">LR</span>
+<span class="w">    </span><span class="n">A</span><span class="o">[</span><span class="n">docker pull 命令</span><span class="o">]</span><span class="w"> </span><span class="c1">--&gt; B{检查本地缓存}</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="c1">--&gt;|镜像已存在| C[直接使用本地镜像]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="c1">--&gt;|镜像不存在| D[访问镜像仓库]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="c1">--&gt; E{配置了镜像源?}</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="c1">--&gt;|是| F[优先访问国内镜像源]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="c1">--&gt;|否| G[访问 Docker Hub]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="c1">--&gt; H[网易镜像]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="c1">--&gt; I[DaoCloud镜像]</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="c1">--&gt; J{下载成功?}</span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="c1">--&gt; J</span>
+<span class="w">    </span><span class="n">J</span><span class="w"> </span><span class="c1">--&gt;|成功| K[保存到本地]</span>
+<span class="w">    </span><span class="n">J</span><span class="w"> </span><span class="c1">--&gt;|失败| G</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="c1">--&gt; L[从官方源下载]</span>
+<span class="w">    </span><span class="n">L</span><span class="w"> </span><span class="c1">--&gt; K</span>
+<span class="w">    </span><span class="n">K</span><span class="w"> </span><span class="c1">--&gt; M[镜像可用]</span>
+</code></pre></div>
+
+<h3 id="_7">🧪 测试镜像拉取速度</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 拉取一个较大的镜像测试速度</span>
+<span class="nb">time</span><span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>python:3.10
+
+<span class="c1"># 对比配置前后的速度差异</span>
+</code></pre></div>
+
+<h2 id="_8">📚 核心概念详解</h2>
+<h3 id="41-image">4.1 镜像 (Image)</h3>
+<h4 id="_9">什么是镜像？</h4>
+<p>镜像是一个<strong>只读的模板</strong>，包含运行应用所需的一切：
+- 代码和程序
+- 运行时环境（Python、Node.js 等）
+- 系统工具和库
+- 配置文件</p>
+<p>可以把镜像理解为：
+- <strong>类</strong>（面向对象编程）→ 镜像
+- <strong>安装包</strong>（软件安装）→ 镜像
+- <strong>模具</strong>（制造业）→ 镜像</p>
+<h4 id="_10">镜像分层结构</h4>
+<p>Docker 镜像采用<strong>分层存储</strong>架构，每一层只记录与上一层的差异：</p>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">TB</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="err">基础镜像层</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">ubuntu</span><span class="o">:</span><span class="mf">22.04</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="err">系统工具层</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">安装</span><span class="w"> </span><span class="n">curl</span><span class="err">、</span><span class="n">git</span><span class="w"> </span><span class="err">等</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">运行时层</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">安装</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="mf">3.10</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">依赖层</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="err">依赖包</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">应用层</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">复制应用代码</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">配置层</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">设置环境变量、启动命令</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">e1f5ff</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">b3e5fc</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">81</span><span class="n">d4fa</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">4f</span><span class="n">c3f7</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">29</span><span class="n">b6f6</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mo">03</span><span class="mi">9</span><span class="n">be5</span>
+</code></pre></div>
+
+<p><strong>分层的好处</strong>：
+- ✅ <strong>节省存储空间</strong>：相同的层可以被多个镜像共享
+- ✅ <strong>加速构建</strong>：未修改的层可以使用缓存
+- ✅ <strong>快速部署</strong>：只需下载修改的层</p>
+<h4 id="_11">常用镜像命令</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 搜索镜像</span>
+docker<span class="w"> </span>search<span class="w"> </span>nginx
+
+<span class="c1"># 拉取镜像</span>
+docker<span class="w"> </span>pull<span class="w"> </span>nginx:latest
+
+<span class="c1"># 查看本地镜像</span>
+docker<span class="w"> </span>images
+
+<span class="c1"># 查看镜像详细信息</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>nginx:latest
+
+<span class="c1"># 删除镜像</span>
+docker<span class="w"> </span>rmi<span class="w"> </span>nginx:latest
+
+<span class="c1"># 构建镜像</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0<span class="w"> </span>.
+
+<span class="c1"># 给镜像打标签</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0<span class="w"> </span>myapp:latest
+
+<span class="c1"># 导出镜像</span>
+docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>nginx.tar<span class="w"> </span>nginx:latest
+
+<span class="c1"># 导入镜像</span>
+docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>nginx.tar
+</code></pre></div>
+
+<h3 id="42-container">4.2 容器 (Container)</h3>
+<h4 id="_12">什么是容器？</h4>
+<p>容器是镜像的<strong>运行实例</strong>，是一个独立运行的应用进程。</p>
+<p><strong>镜像 vs 容器</strong>：
+- <strong>镜像</strong>：静态的文件集合（类比：程序文件）
+- <strong>容器</strong>：动态的运行环境（类比：正在运行的进程）</p>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">LR</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">Docker</span><span class="w"> </span><span class="err">镜像</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">nginx</span><span class="o">:</span><span class="n">latest</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="err">容器实例</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">web</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="o">|</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">容器实例</span><span class="w"> </span><span class="mi">2</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">web</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="o">|</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">容器实例</span><span class="w"> </span><span class="mi">3</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">web</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">2196f</span><span class="mi">3</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">2196f</span><span class="mi">3</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">2196f</span><span class="mi">3</span>
+</code></pre></div>
+
+<h4 id="_13">容器生命周期</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">stateDiagram</span><span class="o">-</span><span class="n">v2</span>
+<span class="w">    </span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">已创建</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">create</span>
+<span class="w">    </span><span class="err">已创建</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">运行中</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">start</span>
+<span class="w">    </span><span class="err">运行中</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">暂停</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">pause</span>
+<span class="w">    </span><span class="err">暂停</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">运行中</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">unpause</span>
+<span class="w">    </span><span class="err">运行中</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">已停止</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">stop</span>
+<span class="w">    </span><span class="err">已停止</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">运行中</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">restart</span>
+<span class="w">    </span><span class="err">运行中</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="err">已停止</span><span class="o">:</span><span class="w"> </span><span class="err">容器内进程退出</span>
+<span class="w">    </span><span class="err">已停止</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">rm</span>
+<span class="w">    </span><span class="err">运行中</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="err">强制删除</span><span class="p">)</span>
+</code></pre></div>
+
+<h4 id="_14">常用容器命令</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 运行容器（创建并启动）</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>mynginx<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx
+
+<span class="c1"># 查看运行中的容器</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># 查看所有容器（包括停止的）</span>
+docker<span class="w"> </span>ps<span class="w"> </span>-a
+
+<span class="c1"># 启动容器</span>
+docker<span class="w"> </span>start<span class="w"> </span>mynginx
+
+<span class="c1"># 停止容器</span>
+docker<span class="w"> </span>stop<span class="w"> </span>mynginx
+
+<span class="c1"># 重启容器</span>
+docker<span class="w"> </span>restart<span class="w"> </span>mynginx
+
+<span class="c1"># 暂停容器</span>
+docker<span class="w"> </span>pause<span class="w"> </span>mynginx
+
+<span class="c1"># 恢复容器</span>
+docker<span class="w"> </span>unpause<span class="w"> </span>mynginx
+
+<span class="c1"># 删除容器</span>
+docker<span class="w"> </span>rm<span class="w"> </span>mynginx
+
+<span class="c1"># 强制删除运行中的容器</span>
+docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>mynginx
+
+<span class="c1"># 进入容器内部</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>mynginx<span class="w"> </span>bash
+
+<span class="c1"># 查看容器日志</span>
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>mynginx
+
+<span class="c1"># 查看容器资源使用情况</span>
+docker<span class="w"> </span>stats<span class="w"> </span>mynginx
+
+<span class="c1"># 查看容器详细信息</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>mynginx
+</code></pre></div>
+
+<h3 id="43-dockerfile">4.3 Dockerfile</h3>
+<h4 id="dockerfile">什么是 Dockerfile？</h4>
+<p>Dockerfile 是一个<strong>文本文件</strong>，包含构建 Docker 镜像的所有指令。通过 Dockerfile，可以自动化、可重复地构建镜像。</p>
+<h4 id="dockerfile_1">Dockerfile 构建流程</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="err">编写</span><span class="w"> </span><span class="n">Dockerfile</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="err">执行</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="kr">build</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">读取</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="err">指令</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">拉取基础镜像</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">执行</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="err">指令</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">安装依赖和工具</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">执行</span><span class="w"> </span><span class="n">COPY</span><span class="o">/</span><span class="n">ADD</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">复制应用文件</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">执行</span><span class="w"> </span><span class="n">ENV</span><span class="o">/</span><span class="n">WORKDIR</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">设置环境变量和工作目录</span><span class="p">]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="err">执行</span><span class="w"> </span><span class="n">EXPOSE</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">声明端口</span><span class="p">]</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">[</span><span class="err">执行</span><span class="w"> </span><span class="n">CMD</span><span class="o">/</span><span class="n">ENTRYPOINT</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">设置启动命令</span><span class="p">]</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="err">生成新镜像</span><span class="p">]</span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">J</span><span class="p">[</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">创建并运行容器</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">fff3e0</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">J</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">2196f</span><span class="mi">3</span>
+</code></pre></div>
+
+<h4 id="dockerfile_2">Dockerfile 常用指令</h4>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FROM</code></td>
+<td>指定基础镜像</td>
+<td><code>FROM python:3.10-slim</code></td>
+</tr>
+<tr>
+<td><code>WORKDIR</code></td>
+<td>设置工作目录</td>
+<td><code>WORKDIR /app</code></td>
+</tr>
+<tr>
+<td><code>COPY</code></td>
+<td>复制文件到镜像</td>
+<td><code>COPY . /app</code></td>
+</tr>
+<tr>
+<td><code>ADD</code></td>
+<td>复制文件（支持 URL 和自动解压）</td>
+<td><code>ADD app.tar.gz /app</code></td>
+</tr>
+<tr>
+<td><code>RUN</code></td>
+<td>执行命令（构建时）</td>
+<td><code>RUN pip install -r requirements.txt</code></td>
+</tr>
+<tr>
+<td><code>CMD</code></td>
+<td>容器启动命令（可被覆盖）</td>
+<td><code>CMD ["python", "app.py"]</code></td>
+</tr>
+<tr>
+<td><code>ENTRYPOINT</code></td>
+<td>容器启动入口（不可覆盖）</td>
+<td><code>ENTRYPOINT ["python"]</code></td>
+</tr>
+<tr>
+<td><code>ENV</code></td>
+<td>设置环境变量</td>
+<td><code>ENV PORT=8000</code></td>
+</tr>
+<tr>
+<td><code>EXPOSE</code></td>
+<td>声明端口</td>
+<td><code>EXPOSE 8000</code></td>
+</tr>
+<tr>
+<td><code>VOLUME</code></td>
+<td>定义数据卷挂载点</td>
+<td><code>VOLUME /data</code></td>
+</tr>
+<tr>
+<td><code>USER</code></td>
+<td>指定运行用户</td>
+<td><code>USER nobody</code></td>
+</tr>
+<tr>
+<td><code>ARG</code></td>
+<td>构建参数</td>
+<td><code>ARG VERSION=1.0</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="dockerfile_3">Dockerfile 示例</h4>
+<div class="codehilite"><pre><span></span><code><span class="c"># 使用官方 Python 运行时作为基础镜像</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.10-slim</span>
+
+<span class="c"># 设置工作目录</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 复制依赖文件</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+
+<span class="c"># 安装依赖（使用国内源加速）</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple/
+
+<span class="c"># 复制应用代码</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+
+<span class="c"># 设置环境变量</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span>
+
+<span class="c"># 暴露端口</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+
+<span class="c"># 创建非 root 用户</span>
+<span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span><span class="m">1000</span><span class="w"> </span>appuser<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>chown<span class="w"> </span>-R<span class="w"> </span>appuser:appuser<span class="w"> </span>/app
+
+<span class="c"># 切换到非 root 用户</span>
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+
+<span class="c"># 启动命令</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h3 id="44-docker-compose">4.4 Docker Compose</h3>
+<h4 id="docker-compose">什么是 Docker Compose？</h4>
+<p>Docker Compose 是一个<strong>多容器编排工具</strong>，用于定义和运行多容器 Docker 应用。通过一个 YAML 文件配置所有服务。</p>
+<p><strong>适用场景</strong>：
+- Web 应用 + 数据库
+- 微服务架构
+- 开发环境快速搭建
+- CI/CD 测试环境</p>
+<h4 id="_15">多容器应用架构</h4>
+<div class="codehilite"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">TB</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;Docker Compose 应用&quot;</span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">Nginx</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="err">反向代理</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;:</span><span class="mi">80</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">FastAPI</span><span class="w"> </span><span class="err">后端</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;:</span><span class="mi">8000</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">MySQL</span><span class="w"> </span><span class="err">数据库</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;:</span><span class="mi">3306</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">Redis</span><span class="w"> </span><span class="err">缓存</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;:</span><span class="mi">6379</span><span class="p">]</span>
+<span class="w">        </span><span class="n">E</span><span class="p">[</span><span class="err">前端静态文件</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">Vue</span><span class="p">.</span><span class="n">js</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="p">.</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">A</span>
+<span class="w">    </span><span class="kd">end</span>
+
+<span class="w">    </span><span class="n">F</span><span class="p">[</span><span class="err">外部访问</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">ff9800</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">2196f</span><span class="mi">3</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">f44336</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">9</span><span class="n">c27b0</span>
+</code></pre></div>
+
+<h4 id="docker-composeyml">docker-compose.yml 示例</h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Web 服务</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=mysql://root:password@db:3306/myapp</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REDIS_URL=redis://cache:6379</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cache</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./app:/app</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-network</span>
+
+<span class="w">  </span><span class="c1"># 数据库服务</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:5.7</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db-data:/var/lib/mysql</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-network</span>
+
+<span class="w">  </span><span class="c1"># 缓存服务</span>
+<span class="w">  </span><span class="nt">cache</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:7-alpine</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-network</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">db-data</span><span class="p">:</span>
+
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app-network</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</code></pre></div>
+
+<h4 id="docker-compose_1">Docker Compose 常用命令</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 启动所有服务</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up
+
+<span class="c1"># 后台启动</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="c1"># 停止服务</span>
+docker<span class="w"> </span>compose<span class="w"> </span>stop
+
+<span class="c1"># 停止并删除容器</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down
+
+<span class="c1"># 查看服务状态</span>
+docker<span class="w"> </span>compose<span class="w"> </span>ps
+
+<span class="c1"># 查看服务日志</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f
+
+<span class="c1"># 重启服务</span>
+docker<span class="w"> </span>compose<span class="w"> </span>restart
+
+<span class="c1"># 构建镜像</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build
+
+<span class="c1"># 进入服务容器</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>bash
+</code></pre></div>
+
+<h2 id="_16">🎯 快速上手实战</h2>
+<h3 id="hello-world">运行第一个容器：Hello World</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 运行官方的 hello-world 镜像</span>
+docker<span class="w"> </span>run<span class="w"> </span>hello-world
+
+<span class="c1"># Docker 会自动：</span>
+<span class="c1"># 1. 检查本地是否有 hello-world 镜像</span>
+<span class="c1"># 2. 如果没有，从配置的镜像源下载</span>
+<span class="c1"># 3. 创建并运行容器</span>
+<span class="c1"># 4. 容器输出欢迎信息后自动退出</span>
+</code></pre></div>
+
+<h3 id="nginx-web">运行一个 Nginx Web 服务器</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 运行 Nginx 容器，映射端口到本地 8080</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>my-nginx<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx
+
+<span class="c1"># 参数说明：</span>
+<span class="c1"># -d: 后台运行</span>
+<span class="c1"># --name: 指定容器名称</span>
+<span class="c1"># -p 8080:80: 将容器的 80 端口映射到主机的 8080 端口</span>
+
+<span class="c1"># 访问 http://localhost:8080 查看效果</span>
+
+<span class="c1"># 查看容器日志</span>
+docker<span class="w"> </span>logs<span class="w"> </span>my-nginx
+
+<span class="c1"># 停止容器</span>
+docker<span class="w"> </span>stop<span class="w"> </span>my-nginx
+
+<span class="c1"># 删除容器</span>
+docker<span class="w"> </span>rm<span class="w"> </span>my-nginx
+</code></pre></div>
+
+<h3 id="_17">常用命令速查表</h3>
+<h4 id="_18">镜像管理</h4>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker pull</code></td>
+<td>拉取镜像</td>
+<td><code>docker pull nginx:latest</code></td>
+</tr>
+<tr>
+<td><code>docker images</code></td>
+<td>列出镜像</td>
+<td><code>docker images</code></td>
+</tr>
+<tr>
+<td><code>docker rmi</code></td>
+<td>删除镜像</td>
+<td><code>docker rmi nginx:latest</code></td>
+</tr>
+<tr>
+<td><code>docker build</code></td>
+<td>构建镜像</td>
+<td><code>docker build -t myapp:v1 .</code></td>
+</tr>
+<tr>
+<td><code>docker tag</code></td>
+<td>标记镜像</td>
+<td><code>docker tag myapp:v1 myapp:latest</code></td>
+</tr>
+<tr>
+<td><code>docker search</code></td>
+<td>搜索镜像</td>
+<td><code>docker search python</code></td>
+</tr>
+<tr>
+<td><code>docker history</code></td>
+<td>查看镜像历史</td>
+<td><code>docker history nginx</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_19">容器管理</h4>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker run</code></td>
+<td>创建并运行容器</td>
+<td><code>docker run -d -p 80:80 nginx</code></td>
+</tr>
+<tr>
+<td><code>docker ps</code></td>
+<td>列出运行中的容器</td>
+<td><code>docker ps</code></td>
+</tr>
+<tr>
+<td><code>docker ps -a</code></td>
+<td>列出所有容器</td>
+<td><code>docker ps -a</code></td>
+</tr>
+<tr>
+<td><code>docker start</code></td>
+<td>启动容器</td>
+<td><code>docker start mynginx</code></td>
+</tr>
+<tr>
+<td><code>docker stop</code></td>
+<td>停止容器</td>
+<td><code>docker stop mynginx</code></td>
+</tr>
+<tr>
+<td><code>docker restart</code></td>
+<td>重启容器</td>
+<td><code>docker restart mynginx</code></td>
+</tr>
+<tr>
+<td><code>docker rm</code></td>
+<td>删除容器</td>
+<td><code>docker rm mynginx</code></td>
+</tr>
+<tr>
+<td><code>docker exec</code></td>
+<td>进入容器执行命令</td>
+<td><code>docker exec -it mynginx bash</code></td>
+</tr>
+<tr>
+<td><code>docker logs</code></td>
+<td>查看容器日志</td>
+<td><code>docker logs -f mynginx</code></td>
+</tr>
+<tr>
+<td><code>docker inspect</code></td>
+<td>查看容器详情</td>
+<td><code>docker inspect mynginx</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_20">系统管理</h4>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker info</code></td>
+<td>显示系统信息</td>
+<td><code>docker info</code></td>
+</tr>
+<tr>
+<td><code>docker version</code></td>
+<td>显示版本信息</td>
+<td><code>docker version</code></td>
+</tr>
+<tr>
+<td><code>docker stats</code></td>
+<td>显示资源使用情况</td>
+<td><code>docker stats</code></td>
+</tr>
+<tr>
+<td><code>docker system df</code></td>
+<td>显示磁盘使用</td>
+<td><code>docker system df</code></td>
+</tr>
+<tr>
+<td><code>docker system prune</code></td>
+<td>清理未使用的资源</td>
+<td><code>docker system prune -a</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="python">💻 实战案例一：Python 应用容器化</h2>
+<h3 id="flask">创建简单的 Flask 应用</h3>
+<p><strong>1. 项目结构</strong></p>
+<div class="codehilite"><pre><span></span><code>flask-demo/
+├── app.py
+├── requirements.txt
+└── Dockerfile
+</code></pre></div>
+
+<p><strong>2. app.py</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello from Docker!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HOSTNAME&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+    <span class="p">})</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/health&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">health</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;healthy&quot;</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PORT&#39;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>3. requirements.txt</strong></p>
+<div class="codehilite"><pre><span></span><code>flask==3.0.0
+</code></pre></div>
+
+<p><strong>4. Dockerfile</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c"># 使用官方 Python 镜像</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.10-slim</span>
+
+<span class="c"># 设置工作目录</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 复制依赖文件</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+
+<span class="c"># 安装依赖（使用清华源）</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple/
+
+<span class="c"># 复制应用代码</span>
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>.
+
+<span class="c"># 设置环境变量</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PORT</span><span class="o">=</span><span class="m">5000</span>
+
+<span class="c"># 暴露端口</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
+
+<span class="c"># 启动命令</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p><strong>5. 构建和运行</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 构建镜像</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>flask-demo:v1.0<span class="w"> </span>.
+
+<span class="c1"># 运行容器</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>flask-app<span class="w"> </span>-p<span class="w"> </span><span class="m">5000</span>:5000<span class="w"> </span>flask-demo:v1.0
+
+<span class="c1"># 测试应用</span>
+curl<span class="w"> </span>http://localhost:5000
+
+<span class="c1"># 查看日志</span>
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>flask-app
+</code></pre></div>
+
+<h3 id="_21">应用容器化流程</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="err">编写应用代码</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">app</span><span class="p">.</span><span class="n">py</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="err">创建依赖文件</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">编写</span><span class="w"> </span><span class="n">Dockerfile</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">构建镜像</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">docker</span><span class="w"> </span><span class="kr">build</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">{</span><span class="err">构建成功</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">失败</span><span class="o">|</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">检查错误日志</span><span class="p">]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">成功</span><span class="o">|</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="err">运行容器</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="p">]</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">[</span><span class="err">测试应用</span><span class="p">]</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">{</span><span class="err">运行正常</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">否</span><span class="o">|</span><span class="w"> </span><span class="n">J</span><span class="p">[</span><span class="err">查看日志调试</span><span class="p">]</span>
+<span class="w">    </span><span class="n">J</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">G</span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">是</span><span class="o">|</span><span class="w"> </span><span class="n">K</span><span class="p">[</span><span class="err">应用成功容器化</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">fff3e0</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">81</span><span class="n">d4fa</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+</code></pre></div>
+
+<h2 id="uv-fastapi">🚀 实战案例二：UV + FastAPI 项目容器化</h2>
+<p>结合本项目的 UV Python 包管理器，创建一个 FastAPI 应用的完整容器化方案。</p>
+<h3 id="_22">项目结构</h3>
+<div class="codehilite"><pre><span></span><code>fastapi-uv-demo/
+├── app/
+│   ├── __init__.py
+│   └── main.py
+├── pyproject.toml
+├── uv.lock
+├── Dockerfile
+└── docker-compose.yml
+</code></pre></div>
+
+<h3 id="_23">应用代码</h3>
+<p><strong>app/main.py</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;FastAPI with UV Demo&quot;</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Item</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;FastAPI + UV + Docker&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ENV&quot;</span><span class="p">,</span> <span class="s2">&quot;development&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/health&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">health_check</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;healthy&quot;</span><span class="p">}</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/items/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_item</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Item</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;created&quot;</span><span class="p">}</span>
+</code></pre></div>
+
+<h3 id="dockerfile-uv">Dockerfile（使用 UV）</h3>
+<div class="codehilite"><pre><span></span><code><span class="c"># 多阶段构建 - 第一阶段：安装依赖</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.10-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+
+<span class="c"># 安装 UV（使用清华源加速）</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>uv<span class="w"> </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple/
+
+<span class="c"># 设置工作目录</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 复制依赖文件</span>
+<span class="k">COPY</span><span class="w"> </span>pyproject.toml<span class="w"> </span>uv.lock<span class="w"> </span>./
+
+<span class="c"># 使用 UV 安装依赖到虚拟环境</span>
+<span class="k">RUN</span><span class="w"> </span>uv<span class="w"> </span>sync<span class="w"> </span>--frozen
+
+<span class="c"># 多阶段构建 - 第二阶段：运行环境</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.10-slim</span>
+
+<span class="c"># 设置工作目录</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 从构建阶段复制虚拟环境</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/.venv<span class="w"> </span>/app/.venv
+
+<span class="c"># 复制应用代码</span>
+<span class="k">COPY</span><span class="w"> </span>app<span class="w"> </span>/app/app
+
+<span class="c"># 设置环境变量</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/app/.venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">ENV</span><span class="o">=</span>production
+
+<span class="c"># 暴露端口</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+
+<span class="c"># 启动命令</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fastapi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app/main.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h3 id="docker-compose_2">Docker Compose 配置</h3>
+<p><strong>docker-compose.yml</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># FastAPI 应用</span>
+<span class="w">  </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastapi-uv-api</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENV=production</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=mysql://root:password@db:3306/fastapi_db</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./app:/app/app</span><span class="w">  </span><span class="c1"># 开发时热重载</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-network</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">  </span><span class="c1"># MySQL 数据库</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:5.7</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastapi-mysql</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastapi_db</span>
+<span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastapi_user</span>
+<span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastapi_pass</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3306:3306&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql-data:/var/lib/mysql</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-network</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">mysql-data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app-network</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</code></pre></div>
+
+<h3 id="fastapi-mysql">FastAPI + MySQL 架构图</h3>
+<div class="codehilite"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">TB</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;Docker Compose 应用&quot;</span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="err">外部请求</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">HTTP</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">FastAPI</span><span class="w"> </span><span class="err">容器</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">api</span><span class="o">:</span><span class="mi">8000</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">MySQL</span><span class="w"> </span><span class="err">容器</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">db</span><span class="o">:</span><span class="mi">3306</span><span class="p">]</span>
+<span class="w">        </span><span class="n">D</span><span class="p">[</span><span class="err">数据卷</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">mysql</span><span class="o">-</span><span class="n">data</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="p">.</span><span class="o">-&gt;|</span><span class="err">持久化</span><span class="o">|</span><span class="w"> </span><span class="n">C</span>
+<span class="w">    </span><span class="kd">end</span>
+
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">应用日志</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">数据库日志</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">ff9800</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mf">2196f</span><span class="mi">3</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">9</span><span class="n">c27b0</span>
+</code></pre></div>
+
+<h3 id="_24">运行步骤</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. 启动所有服务</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="c1"># 2. 查看服务状态</span>
+docker<span class="w"> </span>compose<span class="w"> </span>ps
+
+<span class="c1"># 3. 查看日志</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>api
+
+<span class="c1"># 4. 测试 API</span>
+curl<span class="w"> </span>http://localhost:8000
+curl<span class="w"> </span>http://localhost:8000/health
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/items/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;测试商品&quot;, &quot;price&quot;: 99.99}&#39;</span>
+
+<span class="c1"># 5. 进入容器调试</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>bash
+
+<span class="c1"># 6. 停止服务</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down
+
+<span class="c1"># 7. 停止并删除数据卷</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+</code></pre></div>
+
+<h2 id="docker-compose_3">🔧 Docker Compose 详解</h2>
+<h3 id="compose">Compose 服务依赖关系</h3>
+<div class="codehilite"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">docker</span><span class="w"> </span><span class="n">compose</span><span class="w"> </span><span class="n">up</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="err">检查服务依赖</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">启动</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="err">容器</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">等待</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="err">就绪</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">启动</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="err">容器</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">启动</span><span class="w"> </span><span class="n">api</span><span class="w"> </span><span class="err">容器</span><span class="p">]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="err">所有服务运行中</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">fff3e0</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+</code></pre></div>
+
+<h3 id="_25">常用配置选项</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># 构建配置</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VERSION=1.0</span>
+
+<span class="w">    </span><span class="c1"># 镜像名称</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp:latest</span>
+
+<span class="w">    </span><span class="c1"># 容器名称</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web-app</span>
+
+<span class="w">    </span><span class="c1"># 端口映射</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8443:443&quot;</span>
+
+<span class="w">    </span><span class="c1"># 环境变量</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG=false</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=postgres://user:pass@db/mydb</span>
+
+<span class="w">    </span><span class="c1"># 环境变量文件</span>
+<span class="w">    </span><span class="nt">env_file</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+
+<span class="w">    </span><span class="c1"># 数据卷挂载</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./app:/app</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">static-data:/app/static</span>
+
+<span class="w">    </span><span class="c1"># 网络配置</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+
+<span class="w">    </span><span class="c1"># 依赖服务</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cache</span>
+
+<span class="w">    </span><span class="c1"># 重启策略</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">    </span><span class="c1"># 健康检查</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-f&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;http://localhost:8000/health&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="w">    </span><span class="c1"># 资源限制</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">cpus</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.5&#39;</span>
+<span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512M</span>
+</code></pre></div>
+
+<h2 id="_26">❓ 常见问题与解决方案</h2>
+<h3 id="_27">问题排查决策树</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="err">遇到问题</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">{</span><span class="err">镜像拉取失败</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">是</span><span class="o">|</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">配置国内镜像源</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">否</span><span class="o">|</span><span class="w"> </span><span class="n">D</span><span class="p">{</span><span class="err">容器无法启动</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">是</span><span class="o">|</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">查看日志</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">logs</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">否</span><span class="o">|</span><span class="w"> </span><span class="n">F</span><span class="p">{</span><span class="err">端口无法访问</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">是</span><span class="o">|</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="err">检查端口映射和防火墙</span><span class="p">]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">否</span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="p">{</span><span class="err">权限错误</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">是</span><span class="o">|</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="err">添加用户到</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="err">组</span><span class="p">]</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">否</span><span class="o">|</span><span class="w"> </span><span class="n">J</span><span class="p">{</span><span class="err">磁盘空间不足</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">J</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">是</span><span class="o">|</span><span class="w"> </span><span class="n">K</span><span class="p">[</span><span class="err">清理</span><span class="o">:</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">prune</span><span class="p">]</span>
+<span class="w">    </span><span class="n">J</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">否</span><span class="o">|</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="err">查看官方文档</span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="err">问题解决</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">M</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">M</span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">M</span>
+<span class="w">    </span><span class="n">K</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">M</span>
+
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="n">ff9800</span>
+<span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">4</span><span class="n">caf50</span>
+</code></pre></div>
+
+<h3 id="1">1. 镜像拉取失败</h3>
+<p><strong>问题</strong>：<code>error pulling image: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io: no such host</code></p>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 配置国内镜像源（参考前面章节）</span>
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/docker/daemon.json
+
+<span class="c1"># 添加镜像源配置后重启</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+
+<span class="c1"># 验证配置</span>
+docker<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;Registry Mirrors&quot;</span>
+</code></pre></div>
+
+<h3 id="2_1">2. 权限问题</h3>
+<p><strong>问题</strong>：<code>Got permission denied while trying to connect to the Docker daemon socket</code></p>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 将用户添加到 docker 组</span>
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+
+<span class="c1"># 重新登录或刷新组权限</span>
+newgrp<span class="w"> </span>docker
+
+<span class="c1"># 验证</span>
+docker<span class="w"> </span>ps
+</code></pre></div>
+
+<h3 id="3">3. 端口已被占用</h3>
+<p><strong>问题</strong>：<code>Bind for 0.0.0.0:8080 failed: port is already allocated</code></p>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 查看端口占用</span>
+sudo<span class="w"> </span>lsof<span class="w"> </span>-i<span class="w"> </span>:8080
+sudo<span class="w"> </span>netstat<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">8080</span>
+
+<span class="c1"># 停止占用端口的容器</span>
+docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">8080</span>
+docker<span class="w"> </span>stop<span class="w"> </span>&lt;container_id&gt;
+
+<span class="c1"># 或使用其他端口</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="4_1">4. 容器无法连接网络</h3>
+<p><strong>问题</strong>：容器内无法访问外网</p>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 检查 Docker 网络</span>
+docker<span class="w"> </span>network<span class="w"> </span>ls
+docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>bridge
+
+<span class="c1"># 重启 Docker 服务</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+
+<span class="c1"># 检查防火墙设置</span>
+sudo<span class="w"> </span>ufw<span class="w"> </span>status
+</code></pre></div>
+
+<h3 id="5">5. 磁盘空间不足</h3>
+<p><strong>问题</strong>：<code>no space left on device</code></p>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 查看磁盘使用</span>
+docker<span class="w"> </span>system<span class="w"> </span>df
+
+<span class="c1"># 清理未使用的镜像</span>
+docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w"> </span>-a
+
+<span class="c1"># 清理停止的容器</span>
+docker<span class="w"> </span>container<span class="w"> </span>prune
+
+<span class="c1"># 清理未使用的数据卷</span>
+docker<span class="w"> </span>volume<span class="w"> </span>prune
+
+<span class="c1"># 全面清理（谨慎使用）</span>
+docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a<span class="w"> </span>--volumes
+</code></pre></div>
+
+<h3 id="6">6. 容器内时区问题</h3>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c"># 在 Dockerfile 中设置时区</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Asia/Shanghai
+<span class="k">RUN</span><span class="w"> </span>ln<span class="w"> </span>-snf<span class="w"> </span>/usr/share/zoneinfo/<span class="nv">$TZ</span><span class="w"> </span>/etc/localtime<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$TZ</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/timezone
+</code></pre></div>
+
+<h3 id="7">7. 中文乱码问题</h3>
+<p><strong>解决方案</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c"># 在 Dockerfile 中设置编码</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">LANG</span><span class="o">=</span>C.UTF-8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">LC_ALL</span><span class="o">=</span>C.UTF-8
+</code></pre></div>
+
+<h2 id="_28">🎓 最佳实践</h2>
+<h3 id="1-dockerfile">1. Dockerfile 优化技巧</h3>
+<h4 id="_29">✅ 使用多阶段构建减小镜像体积</h4>
+<div class="codehilite"><pre><span></span><code><span class="c"># 构建阶段</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:18</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="c"># 生产阶段</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/dist<span class="w"> </span>/usr/share/nginx/html
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nginx&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-g&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;daemon off;&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h4 id="run">✅ 合并 RUN 指令减少层数</h4>
+<div class="codehilite"><pre><span></span><code><span class="c"># ❌ 不好：创建多层</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git
+
+<span class="c"># ✅ 好：合并为一层</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+</code></pre></div>
+
+<h4 id="_30">✅ 利用构建缓存</h4>
+<div class="codehilite"><pre><span></span><code><span class="c"># 先复制依赖文件，再复制代码</span>
+<span class="c"># 这样代码改动不会导致重新安装依赖</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</code></pre></div>
+
+<h4 id="dockerignore">✅ 使用 .dockerignore</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># .dockerignore 文件</span>
+<span class="na">.git</span>
+<span class="na">.gitignore</span>
+<span class="nf">node_modules</span>
+<span class="nf">__pycache__</span>
+<span class="err">*</span><span class="na">.pyc</span>
+<span class="na">.env</span>
+<span class="na">.vscode</span>
+<span class="nf">README.md</span>
+</code></pre></div>
+
+<h3 id="2_2">2. 安全建议</h3>
+<div class="codehilite"><pre><span></span><code><span class="c"># ✅ 使用非 root 用户运行</span>
+<span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span><span class="m">1000</span><span class="w"> </span>appuser
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+
+<span class="c"># ✅ 使用官方镜像</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.10-slim</span>
+
+<span class="c"># ✅ 固定版本标签，避免使用 latest</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">nginx:1.25.3-alpine</span>
+
+<span class="c"># ✅ 扫描漏洞</span>
+<span class="c"># docker scan myapp:latest</span>
+</code></pre></div>
+
+<h3 id="3_1">3. 生产环境部署</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 使用健康检查</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>myapp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-cmd<span class="o">=</span><span class="s2">&quot;curl -f http://localhost:8000/health || exit 1&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-interval<span class="o">=</span>30s<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-timeout<span class="o">=</span>10s<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-retries<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>myapp:latest
+
+<span class="c1"># 设置资源限制</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>myapp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cpus<span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="o">=</span><span class="s2">&quot;512m&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>myapp:latest
+
+<span class="c1"># 设置重启策略</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>myapp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--restart<span class="o">=</span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>myapp:latest
+</code></pre></div>
+
+<h3 id="4_2">4. 日志管理</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 限制日志大小</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>myapp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--log-driver<span class="o">=</span>json-file<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--log-opt<span class="w"> </span>max-size<span class="o">=</span>10m<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--log-opt<span class="w"> </span>max-file<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>myapp:latest
+</code></pre></div>
+
+<h2 id="_31">📖 进阶资源</h2>
+<h3 id="_32">官方文档</h3>
+<ul>
+<li><a href="https://docs.docker.com/">Docker 官方文档</a></li>
+<li><a href="https://hub.docker.com/">Docker Hub</a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile 参考</a></li>
+<li><a href="https://docs.docker.com/compose/">Docker Compose 文档</a></li>
+</ul>
+<h3 id="_33">推荐教程</h3>
+<ul>
+<li><a href="https://yeasy.gitbook.io/docker_practice/">Docker 从入门到实践</a></li>
+<li><a href="https://www.docker.org.cn/">Docker 中文社区</a></li>
+</ul>
+<h3 id="_34">镜像仓库</h3>
+<ul>
+<li><strong>Docker Hub</strong>：https://hub.docker.com/</li>
+<li><strong>网易镜像中心</strong>：https://c.163yun.com/hub</li>
+<li><strong>阿里云容器镜像服务</strong>：https://cr.console.aliyun.com/</li>
+</ul>
+<h3 id="_35">相关项目</h3>
+<ul>
+<li><strong>本项目 UV 教程</strong>：<a href="../uv/getting-started.md">UV 快速入门</a></li>
+<li><strong>FastAPI 项目示例</strong>：<a href="../../../examples/fastapi-demo/">examples/fastapi-demo</a></li>
+</ul>
+<h2 id="_36">🎉 总结</h2>
+<p>恭喜你完成 Docker 快速入门教程！现在你已经掌握：</p>
+<p>✅ Docker 的核心概念和架构
+✅ 在 Ubuntu 22.04 上安装和配置 Docker
+✅ 配置国内镜像源加速镜像拉取
+✅ 镜像和容器的管理
+✅ 编写 Dockerfile 构建自定义镜像
+✅ 使用 Docker Compose 编排多容器应用
+✅ Python/FastAPI 应用的容器化实战
+✅ 常见问题的排查和解决
+✅ 生产环境的最佳实践</p>
+<h3 id="_37">下一步建议</h3>
+<ol>
+<li><strong>实践项目</strong>：将自己的项目容器化</li>
+<li><strong>学习编排</strong>：了解 Kubernetes（K8s）</li>
+<li><strong>CI/CD 集成</strong>：将 Docker 集成到 CI/CD 流程</li>
+<li><strong>性能优化</strong>：学习镜像优化和容器监控</li>
+<li><strong>安全加固</strong>：学习 Docker 安全最佳实践</li>
+</ol>
+<hr />
+<blockquote>
+<p>💡 <strong>提示</strong>：Docker 是一门实践性很强的技术，建议多动手操作，遇到问题查看官方文档和社区资源。</p>
+<p>📝 <strong>反馈</strong>：如果你对本教程有任何建议或发现错误，欢迎提交 Issue 或 Pull Request！</p>
+</blockquote>
+
+        
+
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+            <h3>🔗 相关链接</h3>
+            <ul>
+                <li><a href="/">返回首页</a></li>
+                <li><a href="https://docs.astral.sh/uv/" target="_blank">UV 官方文档</a></li>
+                <li><a href="https://github.com/astral-sh/uv" target="_blank">UV GitHub 仓库</a></li>
+                <li><a href="https://pypi.tuna.tsinghua.edu.cn/" target="_blank">清华大学 PyPI 镜像</a></li>
+            </ul>
+        </div>
+    </div>
+</article>
+
+<style>
+.copy-button:hover {
+    background: #45a049 !important;
+}
+</style>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于教程</h3>
+                    <p>本教程专注于 UV Python 包管理器的快速入门和实战应用，特别针对国内用户进行了优化。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="/tutorials/uv/getting-started.html">UV 快速入门</a></li>
+                        <li><a href="https://docs.astral.sh/uv/" target="_blank">官方文档</a></li>
+                        <li><a href="https://pypi.tuna.tsinghua.edu.cn/" target="_blank">清华镜像源</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <ul>
+                        <li><a href="https://github.com/Devliang24/myblog" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.2); margin: 2rem 0;">
+            <p>&copy; 2025 UV Tutorial. 使用 ❤️ 和 UV 构建。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 代码复制功能
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach(function(block) {
+                const button = document.createElement('button');
+                button.className = 'copy-button';
+                button.textContent = '复制';
+                button.style.position = 'absolute';
+                button.style.top = '10px';
+                button.style.right = '10px';
+                button.style.background = '#4CAF50';
+                button.style.color = 'white';
+                button.style.border = 'none';
+                button.style.padding = '5px 10px';
+                button.style.borderRadius = '4px';
+                button.style.cursor = 'pointer';
+                button.style.fontSize = '12px';
+
+                const pre = block.parentNode;
+                pre.style.position = 'relative';
+                pre.appendChild(button);
+
+                button.addEventListener('click', function() {
+                    navigator.clipboard.writeText(block.textContent).then(function() {
+                        button.textContent = '已复制!';
+                        setTimeout(function() {
+                            button.textContent = '复制';
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

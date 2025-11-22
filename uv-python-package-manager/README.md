@@ -5,8 +5,10 @@ UV Python 包管理器完整教程和实战项目，包含快速入门指南、�
 ## 🚀 项目特点
 
 - **超快的包管理**：使用 UV 替代传统的 pip，享受 10-100 倍的速度提升
-- **国内源优化**：配置清华大学镜像源，解决国内网络访问问题
+- **容器化技术**：完整的 Docker 教程，从入门到实战，含流程图详解
+- **国内源优化**：配置清华大学 PyPI 镜像源和 Docker 镜像源，解决国内网络访问问题
 - **现代 Python 工具链**：使用 pyproject.toml 和现代 Python 开发最佳实践
+- **实战导向**：UV + FastAPI + Docker 完整项目示例，可直接用于生产环境
 - **响应式设计**：支持桌面和移动设备的友好界面
 - **Markdown 支持**：使用 Markdown 编写文章，支持语法高亮和 TOC
 
@@ -16,8 +18,10 @@ UV Python 包管理器完整教程和实战项目，包含快速入门指南、�
 uv-python-package-manager/
 ├── content/                 # 教程内容目录
 │   └── tutorials/
-│       └── uv/
-│           └── getting-started.md    # 完整的 UV 快速入门教程
+│       ├── uv/
+│       │   └── getting-started.md    # 完整的 UV 快速入门教程
+│       └── docker/
+│           └── getting-started.md    # 完整的 Docker 快速入门教程
 ├── docs/                    # 技术文档和报告
 │   └── INSTALLATION_REPORT.md      # UV 安装验证报告
 ├── examples/                # 实战项目示例
@@ -176,6 +180,18 @@ uv run pytest --cov=scripts --cov-report=html
 - ✅ 常用命令速查表（项目管理、包管理）
 - ✅ 问题解决方案（网络、依赖、环境问题）
 
+### Docker 教程内容 (`content/tutorials/docker/getting-started.md`)
+
+- ✅ Docker 核心概念和架构（含 Mermaid 流程图）
+- ✅ Ubuntu 22.04 安装指南（多种安装方式）
+- ✅ 国内镜像源配置（网易、DaoCloud 等）
+- ✅ 镜像和容器管理（完整命令速查表）
+- ✅ Dockerfile 编写和多阶段构建
+- ✅ Docker Compose 多容器编排
+- ✅ Python/FastAPI 应用容器化实战
+- ✅ UV + FastAPI + MySQL 完整示例
+- ✅ 常见问题排查和最佳实践
+
 ### 技术文档 (`docs/`)
 
 - ✅ UV 安装验证报告（基于实际系统测试）
@@ -238,9 +254,17 @@ rsync -av public/ user@server:/var/www/html/
 
 ## 🔗 相关链接
 
+### Python 包管理
 - [UV 官方文档](https://docs.astral.sh/uv/)
 - [UV GitHub 仓库](https://github.com/astral-sh/uv)
 - [清华大学 PyPI 镜像](https://pypi.tuna.tsinghua.edu.cn/)
+
+### 容器化技术
+- [Docker 官方文档](https://docs.docker.com/)
+- [Docker Hub](https://hub.docker.com/)
+- [Docker Compose 文档](https://docs.docker.com/compose/)
+
+### Web 框架
 - [FastAPI 文档](https://fastapi.tiangolo.com/)
 
 ## 🙏 致谢
