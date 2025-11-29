@@ -13,10 +13,10 @@ Dockerfile 是一个文本文件，包含了一系列指令，Docker 使用它�
 
 ```mermaid
 graph BT
-    L1[Base Image (Ubuntu)] --> L2[Add Python]
-    L2 --> L3[Copy Code]
-    L3 --> L4[Install Deps]
-    L4 --> Final[Final App Image]
+    L1["Base Image (Ubuntu)"] --> L2["Add Python"]
+    L2 --> L3["Copy Code"]
+    L3 --> L4["Install Deps"]
+    L4 --> Final["Final App Image"]
     
     style Final fill:#f96,stroke:#333,stroke-width:2px
 ```

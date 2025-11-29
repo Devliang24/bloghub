@@ -11,6 +11,20 @@
 
 在 FastAPI 中，我们使用 **Pydantic** 模型来声明请求体。
 
+### 数据流转图
+
+```mermaid
+graph TD
+    JSON["JSON Data<br>(Client)"] -- POST --> API["FastAPI Endpoint"]
+    API -- Validate --> Pydantic{Pydantic Model}
+    Pydantic -- Valid --> PyObj["Python Object<br>(item.name)"]
+    Pydantic -- Invalid --> Error["422 Error<br>(Detail JSON)"]
+    PyObj --> Logic["Business Logic"]
+    
+    style Pydantic fill:#f96,stroke:#333
+    style PyObj fill:#8bc34a,stroke:#333
+```
+
 ## 🛠️ 定义数据模型
 
 首先，从 `pydantic` 导入 `BaseModel`：

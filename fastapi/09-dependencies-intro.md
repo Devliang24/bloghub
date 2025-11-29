@@ -17,6 +17,18 @@
 
 简而言之，就是**你需要什么，FastAPI 就给你送过来**。
 
+### 依赖解析过程
+
+```mermaid
+graph LR
+    Req[Request] --> Dep1[Dependency A]
+    Req --> Dep2[Dependency B]
+    Dep1 --> PathOp["Path Operation<br>(Function)"]
+    Dep2 --> PathOp
+    
+    style PathOp fill:#f9f,stroke:#333
+```
+
 ## 🛠️ 创建一个依赖项
 
 依赖项就是一个简单的 Python 函数（可以是异步 `async` 也可以是同步）。

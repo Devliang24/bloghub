@@ -83,6 +83,21 @@ FastAPI 自身不处理 HTTPS。在生产环境中，通常在 FastAPI 前面架
 
 客户端 (HTTPS) -> Nginx (解密) -> (HTTP) -> Uvicorn/FastAPI
 
+### 生产环境架构图
+
+```mermaid
+graph LR
+    Client[客户端] -- HTTPS --> Nginx[Nginx LB]
+    Nginx -- HTTP --> Gunicorn[Gunicorn Manager]
+    Gunicorn -- Manage --> Worker1["Uvicorn Worker 1"]
+    Gunicorn -- Manage --> Worker2["Uvicorn Worker 2"]
+    Worker1 --> App["FastAPI App"]
+    Worker2 --> App
+    
+    style Nginx fill:#f9f,stroke:#333
+    style Gunicorn fill:#bbf,stroke:#333
+```
+
 ## 📚 总结
 
 *   开发环境用 `fastapi dev`。

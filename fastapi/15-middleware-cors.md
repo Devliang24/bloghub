@@ -13,6 +13,18 @@
 
 你可以利用它来记录日志、计算处理时间、添加特定的 Header 等。
 
+### 洋葱模型
+
+```mermaid
+graph LR
+    Req[Request] --> Middleware
+    Middleware -- Pre-process --> App["FastAPI App"]
+    App -- Post-process --> Middleware
+    Middleware --> Res[Response]
+    
+    style Middleware fill:#f9f,stroke:#333
+```
+
 ## ⏱️ 编写一个计时中间件
 
 ```python

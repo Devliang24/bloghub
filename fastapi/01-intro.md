@@ -9,6 +9,20 @@
 
 **FastAPI** 是一个用于构建 API 的现代、快速（高性能）的 Web 框架，使用 Python 3.8+ 并基于标准的 Python 类型提示。
 
+### 请求处理流程
+
+```mermaid
+graph LR
+    Client[客户端] -- HTTP --> Uvicorn["Uvicorn<br>(ASGI Server)"]
+    Uvicorn -- ASGI --> Starlette["Starlette<br>(Routing/Web)"]
+    Starlette --> FastAPI["FastAPI<br>(App)"]
+    FastAPI -- Validate --> Pydantic["Pydantic<br>(Data Validation)"]
+    
+    style Uvicorn fill:#f9f,stroke:#333
+    style FastAPI fill:#bbf,stroke:#333
+    style Pydantic fill:#bfb,stroke:#333
+```
+
 ### 核心特性
 
 *   **⚡ 极快**：可与 NodeJS 和 Go 比肩的极高性能（归功于 Starlette 和 Pydantic）。

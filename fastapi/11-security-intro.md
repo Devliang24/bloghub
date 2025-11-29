@@ -13,6 +13,21 @@ FastAPI 提供了 `fastapi.security` 模块，封装了多种安全机制（OAut
 
 我们将实现 **OAuth2 Password Flow**。这是最常见的登录方式：前端发送用户名和密码，后端验证后返回一个 Token（通常是 Bearer Token）。前端之后在请求头中携带这个 Token。
 
+### 认证流程图
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    
+    User->>Frontend: 输入用户名/密码
+    Frontend->>API: POST /token (username, password)
+    API-->>Frontend: 返回 Access Token
+    Frontend->>API: GET /items (Header: Bearer Token)
+    API-->>Frontend: 返回受保护数据
+```
+
 ### 1. 设置 OAuth2Scheme
 
 ```python

@@ -14,6 +14,20 @@
 
 如果你在请求处理函数中直接执行这些操作，用户就必须等待所有操作完成才能收到响应。
 
+### 执行时序图
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API
+    participant Background
+    
+    Client->>API: 发送请求
+    API->>Background: 添加任务到队列
+    API-->>Client: 立即返回响应
+    Background->>Background: 执行耗时任务
+```
+
 ## 🐇 使用 BackgroundTasks
 
 FastAPI 提供了 `BackgroundTasks` 类，可以让你安排任务在**返回响应之后**执行。
