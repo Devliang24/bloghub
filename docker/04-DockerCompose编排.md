@@ -20,8 +20,8 @@
 graph TD
     User((User)) --> Nginx[Nginx Proxy]
     Nginx --> Web[Web App]
-    Web --> DB[(MySQL)]
-    Web --> Redis[(Redis)]
+    Web --> DB["(MySQL)"]
+    Web --> Redis["(Redis)"]
 
 ```
 
