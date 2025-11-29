@@ -14,11 +14,11 @@
 
 ```mermaid
 graph LR
-    Req[测试函数请求] --> Pytest
-    Pytest -- 查找 --> FixtureDef[@pytest.fixture]
-    FixtureDef -- 实例化/执行 --> Instance[实例对象]
-    Instance -- 注入 --> TestFunc[执行测试]
-    TestFunc -- 结束 --> Teardown[清理资源]
+    Req["测试函数请求"] --> Pytest
+    Pytest -- 查找 --> FixtureDef["@pytest.fixture"]
+    FixtureDef -- 实例化/执行 --> Instance["实例对象"]
+    Instance -- 注入 --> TestFunc["执行测试"]
+    TestFunc -- 结束 --> Teardown["清理资源"]
 ```
 
 ## 🛠️ 定义与使用
