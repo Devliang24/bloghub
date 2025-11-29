@@ -13,8 +13,8 @@ Docker 是一个开源的应用容器引擎。它允许开发者将应用及其�
 
 ```mermaid
 graph LR
-    Client[Docker Client<br>(CLI)] -- 命令 --> Daemon[Docker Daemon<br>(Server)]
-    Daemon -- 拉取 --> Registry[Docker Registry<br>(Docker Hub)]
+    Client["Docker Client<br>(CLI)"] -- 命令 --> Daemon["Docker Daemon<br>(Server)"]
+    Daemon -- 拉取 --> Registry["Docker Registry<br>(Docker Hub)"]
     Daemon -- 运行 --> Container[Containers]
     Daemon -- 管理 --> Image[Images]
 

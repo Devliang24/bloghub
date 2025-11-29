@@ -17,11 +17,11 @@ graph TD
     Container[容器文件系统]
     
     subgraph Bind Mount
-    PathA[宿主机任意路径<br>/home/user/code] <--> PathB[容器路径<br>/app]
+    PathA["宿主机任意路径<br>/home/user/code"] <--> PathB["容器路径<br>/app"]
     end
     
     subgraph Docker Volume
-    Vol[Docker 管理区域<br>/var/lib/docker/volumes/...] <--> PathC[容器路径<br>/var/lib/mysql]
+    Vol["Docker 管理区域<br>/var/lib/docker/volumes/..."] <--> PathC["容器路径<br>/var/lib/mysql"]
     end
     
     Host --> Bind Mount
