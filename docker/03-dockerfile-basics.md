@@ -1,11 +1,3 @@
----
-title: "Docker 教程 - 03. 编写 Dockerfile"
-date: "2025-11-30"
-category: "Docker"
-tags: ["Docker", "Dockerfile", "构建", "镜像"]
-author: "Devliang24"
-description: "学习编写高效的 Dockerfile，理解镜像分层原理，以及如何构建自己的应用镜像。"
----
 
 # Docker 教程 - 03. 编写 Dockerfile
 

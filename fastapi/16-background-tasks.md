@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 16. 后台任务"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "BackgroundTasks", "异步"]
-author: "Devliang24"
-description: "学习如何使用 BackgroundTasks 在返回响应后执行耗时操作，如发送邮件或处理数据，提升 API 响应速度。"
----
 
 # FastAPI 教程 - 16. 后台任务
 

@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 20. 大型项目结构"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "架构", "最佳实践"]
-author: "Devliang24"
-description: "学习如何组织大型 FastAPI 项目的代码结构，使用 APIRouter 分解路由，实现清晰、可维护的模块化架构。"
----
 
 # FastAPI 教程 - 20. 大型项目结构
 

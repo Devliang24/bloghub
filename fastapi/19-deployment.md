@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 19. 部署指南"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "Deployment", "Docker", "Uvicorn"]
-author: "Devliang24"
-description: "学习如何将 FastAPI 应用部署到生产环境，包括使用 Uvicorn, Gunicorn 以及 Docker 容器化部署。"
----
 
 # FastAPI 教程 - 19. 部署指南
 

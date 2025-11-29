@@ -1,11 +1,3 @@
----
-title: "Docker 教程 - 01. 简介与安装"
-date: "2025-11-30"
-category: "Docker"
-tags: ["Docker", "容器化", "安装", "镜像源"]
-author: "Devliang24"
-description: "了解 Docker 的核心架构，在 Windows/Linux 上安装 Docker，并配置国内镜像加速器以提升下载速度。"
----
 
 # Docker 教程 - 01. 简介与安装
 

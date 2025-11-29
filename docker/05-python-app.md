@@ -1,11 +1,3 @@
----
-title: "Docker 教程 - 05. 实战：Python 应用容器化"
-date: "2025-11-30"
-category: "Docker"
-tags: ["Docker", "Python", "FastAPI", "UV", "多阶段构建"]
-author: "Devliang24"
-description: "从零开始将一个 FastAPI 应用容器化，使用 UV 加速构建，并采用多阶段构建优化镜像体积。"
----
 
 # Docker 教程 - 05. 实战：Python 应用容器化
 

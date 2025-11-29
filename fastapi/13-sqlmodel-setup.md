@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 13. 数据库连接 (SQLModel)"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "SQLModel", "Database", "ORM"]
-author: "Devliang24"
-description: "SQLModel 是 FastAPI 作者开发的数据库库，结合了 Pydantic 和 SQLAlchemy 的优点。本章介绍如何配置和连接数据库。"
----
 
 # FastAPI 教程 - 13. 数据库连接 (SQLModel)
 

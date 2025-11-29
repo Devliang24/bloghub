@@ -1,11 +1,3 @@
----
-title: "Docker 教程 - 04. Docker Compose 编排"
-date: "2025-11-30"
-category: "Docker"
-tags: ["Docker", "Compose", "编排", "YAML"]
-author: "Devliang24"
-description: "使用 Docker Compose 定义和运行多容器应用，通过 YAML 文件一键管理服务依赖关系。"
----
 
 # Docker 教程 - 04. Docker Compose 编排
 

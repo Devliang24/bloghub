@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 11. 安全基础"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "Security", "OAuth2"]
-author: "Devliang24"
-description: "介绍 FastAPI 的安全工具，OAuth2 密码模式的基本概念，以及如何在 Swagger UI 中集成登录按钮。"
----
 
 # FastAPI 教程 - 11. 安全基础
 

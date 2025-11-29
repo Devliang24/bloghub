@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 09. 依赖注入入门"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "依赖注入", "Dependencies"]
-author: "Devliang24"
-description: "FastAPI 的核心特性之一：依赖注入系统。学习如何创建共享逻辑，复用代码，以及处理数据库连接等通用场景。"
----
 
 # FastAPI 教程 - 09. 依赖注入入门
 

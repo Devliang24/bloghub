@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 12. JWT 认证实战"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "JWT", "Authentication", "Token"]
-author: "Devliang24"
-description: "完整的 JWT 登录实现：用户验证、Token 生成、Token 解析以及受保护路由的访问控制。"
----
 
 # FastAPI 教程 - 12. JWT 认证实战
 

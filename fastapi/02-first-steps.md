@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 02. 第一步"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "基础", "交互式文档"]
-author: "Devliang24"
-description: "编写第一个 FastAPI 应用，学习如何运行开发服务器并使用自动生成的交互式文档。"
----
 
 # FastAPI 教程 - 02. 第一步
 

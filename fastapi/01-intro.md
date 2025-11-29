@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 01. 简介与安装"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "Python", "Web开发", "UV"]
-author: "Devliang24"
-description: "了解 FastAPI 的核心特性，使用 UV 包管理器快速搭建高性能开发环境。"
----
 
 # FastAPI 教程 - 01. 简介与安装
 

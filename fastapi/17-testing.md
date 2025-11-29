@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 17. 自动化测试"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "Testing", "Pytest", "TestClient"]
-author: "Devliang24"
-description: "基于 Pytest 和 TestClient 编写测试用例，确保 FastAPI 应用的稳定性和正确性。"
----
 
 # FastAPI 教程 - 17. 自动化测试
 

@@ -1,11 +1,3 @@
----
-title: "Docker 教程 - 06. 网络与存储"
-date: "2025-11-30"
-category: "Docker"
-tags: ["Docker", "Network", "Volume", "数据持久化"]
-author: "Devliang24"
-description: "深入理解 Docker 的网络模式（Bridge, Host）以及如何使用 Volumes 和 Bind Mounts 实现数据持久化。"
----
 
 # Docker 教程 - 06. 网络与存储
 

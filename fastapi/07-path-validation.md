@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 07. 路径参数校验"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "校验", "Path", "数值校验"]
-author: "Devliang24"
-description: "学习使用 Path 类对路径参数进行数值范围校验（大于/小于）和格式限制。"
----
 
 # FastAPI 教程 - 07. 路径参数校验
 

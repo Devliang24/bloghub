@@ -1,11 +1,3 @@
----
-title: "Docker 教程 - 02. 常用命令速查"
-date: "2025-11-30"
-category: "Docker"
-tags: ["Docker", "CLI", "命令速查"]
-author: "Devliang24"
-description: "掌握 Docker 最常用的核心命令，通过状态机图解理解容器的生命周期管理。"
----
 
 # Docker 教程 - 02. 常用命令速查
 

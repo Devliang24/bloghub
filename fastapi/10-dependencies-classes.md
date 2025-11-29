@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 10. 类作为依赖"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "依赖注入", "Class"]
-author: "Devliang24"
-description: "学习如何使用 Python 类作为依赖项，利用类的初始化方法来清理参数声明，使代码更加优雅。"
----
 
 # FastAPI 教程 - 10. 类作为依赖
 

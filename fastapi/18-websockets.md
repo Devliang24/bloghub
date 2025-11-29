@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 18. WebSockets"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "WebSockets", "实时通信"]
-author: "Devliang24"
-description: "学习如何使用 FastAPI 构建 WebSocket 服务，实现客户端和服务器之间的全双工实时通信。"
----
 
 # FastAPI 教程 - 18. WebSockets
 

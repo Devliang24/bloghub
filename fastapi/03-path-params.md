@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 03. 路径参数"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "路径参数", "类型转换", "Enum"]
-author: "Devliang24"
-description: "学习如何声明路径参数，使用 Python 类型提示进行自动解析和验证，以及如何使用枚举限制参数值。"
----
 
 # FastAPI 教程 - 03. 路径参数
 

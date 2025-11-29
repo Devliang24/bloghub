@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 05. 请求体"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "请求体", "Pydantic", "JSON"]
-author: "Devliang24"
-description: "学习如何使用 Pydantic 模型来定义和接收请求体数据，享受自动数据校验和 JSON 转换的便利。"
----
 
 # FastAPI 教程 - 05. 请求体
 

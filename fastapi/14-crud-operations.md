@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 14. CRUD 操作"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "SQLModel", "CRUD"]
-author: "Devliang24"
-description: "使用 SQLModel 和 FastAPI 实现完整的创建(Create)、读取(Read)、更新(Update)和删除(Delete)操作。"
----
 
 # FastAPI 教程 - 14. CRUD 操作
 

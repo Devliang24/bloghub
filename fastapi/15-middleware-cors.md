@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 15. 中间件与 CORS"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "Middleware", "CORS", "跨域"]
-author: "Devliang24"
-description: "了解如何编写中间件来拦截和处理请求，以及如何配置 CORS 以允许前端跨域访问 API。"
----
 
 # FastAPI 教程 - 15. 中间件与 CORS
 

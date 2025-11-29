@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 04. 查询参数"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "查询参数", "默认值", "可选参数"]
-author: "Devliang24"
-description: "学习如何声明查询参数，设置默认值，标记为可选，以及布尔类型的自动转换。"
----
 
 # FastAPI 教程 - 04. 查询参数
 

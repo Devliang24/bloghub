@@ -1,11 +1,3 @@
----
-title: "FastAPI 教程 - 08. 多参数混合"
-date: "2025-11-30"
-category: "FastAPI"
-tags: ["FastAPI", "多参数", "Body", "嵌入式"]
-author: "Devliang24"
-description: "实战演示如何在一个接口中同时接收路径参数、查询参数和请求体，以及如何处理多个请求体模型。"
----
 
 # FastAPI 教程 - 08. 多参数混合
 
