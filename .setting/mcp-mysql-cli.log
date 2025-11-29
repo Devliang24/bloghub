@@ -1,0 +1,32 @@
+2025-11-29T09:38:21.684Z | INFO | Starting MCP MySQL server from: C:\Users\hui\AppData\Local\npm-cache\_npx\080bc9f59514dad9\node_modules\@liangshanli\mcp-server-mysql\src\server-final.js
+2025-11-29T09:38:21.697Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"110.40.159.145","MYSQL_PORT":"8020","MYSQL_USER":"ecommerce_user","MYSQL_DATABASE":"ecommerce","READONLY":"false","ALLOW_DDL":"false","ALLOW_DROP":"false","ALLOW_DELETE":"false","TOOL_PREFIX":"(not set)","PROJECT_NAME":"(not set)","MCP_LOG_DIR":"./.setting","MCP_DDL_LOG_FILE":"ddl.sql"}
+2025-11-29T09:38:21.728Z | INFO | MCP MySQL server process started with PID: 32556
+2025-11-29T09:38:21.730Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-29T09:38:21.731Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-29T09:38:24.006Z | INFO | MCP MySQL server exited with code: 1
+2025-11-29T09:38:25.008Z | INFO | CLI process exiting after server shutdown
+2025-11-29T09:38:25.010Z | INFO | CLI process exiting with code: 1
+2025-11-29T09:45:27.149Z | INFO | Starting MCP MySQL server from: C:\Users\hui\AppData\Local\npm-cache\_npx\080bc9f59514dad9\node_modules\@liangshanli\mcp-server-mysql\src\server-final.js
+2025-11-29T09:45:27.153Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"110.40.159.145","MYSQL_PORT":"8020","MYSQL_USER":"ecommerce_user","MYSQL_DATABASE":"ecommerce","READONLY":"false","ALLOW_DDL":"false","ALLOW_DROP":"false","ALLOW_DELETE":"false","TOOL_PREFIX":"(not set)","PROJECT_NAME":"(not set)","MCP_LOG_DIR":"./.setting","MCP_DDL_LOG_FILE":"ddl.sql"}
+2025-11-29T09:45:27.168Z | INFO | MCP MySQL server process started with PID: 33428
+2025-11-29T09:45:27.169Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-29T09:45:27.169Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-29T09:45:28.485Z | INFO | MCP MySQL server exited with code: 1
+2025-11-29T09:45:29.487Z | INFO | CLI process exiting after server shutdown
+2025-11-29T09:45:29.488Z | INFO | CLI process exiting with code: 1
+2025-11-29T09:47:11.701Z | INFO | Starting MCP MySQL server from: C:\Users\hui\AppData\Local\npm-cache\_npx\080bc9f59514dad9\node_modules\@liangshanli\mcp-server-mysql\src\server-final.js
+2025-11-29T09:47:11.713Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"110.40.159.145","MYSQL_PORT":"8020","MYSQL_USER":"ecommerce_user","MYSQL_DATABASE":"ecommerce","READONLY":"false","ALLOW_DDL":"false","ALLOW_DROP":"false","ALLOW_DELETE":"false","TOOL_PREFIX":"(not set)","PROJECT_NAME":"(not set)","MCP_LOG_DIR":"./.setting","MCP_DDL_LOG_FILE":"ddl.sql"}
+2025-11-29T09:47:11.732Z | INFO | MCP MySQL server process started with PID: 35624
+2025-11-29T09:47:11.733Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-29T09:47:11.733Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-29T09:47:13.041Z | INFO | MCP MySQL server exited with code: 1
+2025-11-29T09:47:14.042Z | INFO | CLI process exiting after server shutdown
+2025-11-29T09:47:14.043Z | INFO | CLI process exiting with code: 1
+2025-11-29T10:34:54.393Z | INFO | Starting MCP MySQL server from: C:\Users\hui\AppData\Local\npm-cache\_npx\080bc9f59514dad9\node_modules\@liangshanli\mcp-server-mysql\src\server-final.js
+2025-11-29T10:34:54.397Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"110.40.159.145","MYSQL_PORT":"8020","MYSQL_USER":"ecommerce_user","MYSQL_DATABASE":"ecommerce","READONLY":"false","ALLOW_DDL":"false","ALLOW_DROP":"false","ALLOW_DELETE":"false","TOOL_PREFIX":"(not set)","PROJECT_NAME":"(not set)","MCP_LOG_DIR":"./.setting","MCP_DDL_LOG_FILE":"ddl.sql"}
+2025-11-29T10:34:54.409Z | INFO | MCP MySQL server process started with PID: 32256
+2025-11-29T10:34:54.410Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-29T10:34:54.410Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-29T10:34:55.411Z | INFO | MCP MySQL server exited with code: 1
+2025-11-29T10:34:56.417Z | INFO | CLI process exiting after server shutdown
+2025-11-29T10:34:56.418Z | INFO | CLI process exiting with code: 1
