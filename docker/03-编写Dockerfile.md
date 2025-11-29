@@ -18,7 +18,6 @@ graph BT
     L3 --> L4["Install Deps"]
     L4 --> Final["Final App Image"]
     
-    style Final fill:#f96,stroke:#333,stroke-width:2px
 ```
 
 每一条指令都会创建一个新的**层 (Layer)**。Docker 会缓存未变动的层，从而加速构建。

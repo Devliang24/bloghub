@@ -22,7 +22,6 @@ graph LR
     App -- Post-process --> Middleware
     Middleware --> Res[Response]
     
-    style Middleware fill:#f9f,stroke:#333
 ```
 
 ## ⏱️ 编写一个计时中间件

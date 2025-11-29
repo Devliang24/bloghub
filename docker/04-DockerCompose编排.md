@@ -23,9 +23,6 @@ graph TD
     Web --> DB[(MySQL)]
     Web --> Redis[(Redis)]
 
-    style Web fill:#f9f,stroke:#333
-    style DB fill:#bbf,stroke:#333
-    style Redis fill:#bbf,stroke:#333
 ```
 
 ## 📝 编写 docker-compose.yml

@@ -18,7 +18,6 @@ flowchart LR
     Stage1 -->|Copy .venv| Stage2[运行阶段]
     Stage2 --> Image[最终镜像]
     
-    style Image fill:#8bc34a,stroke:#333
 ```
 
 ## 📄 项目准备
