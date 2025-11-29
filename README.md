@@ -52,6 +52,15 @@
 *   [05. 实战：Python 应用容器化](docker/05-实战Python应用.md)
 *   [06. 网络与存储](docker/06-网络与存储.md)
 
+### 🧪 Pytest 快速入门教程 (6 篇)
+
+*   [01. 简介与安装](pytest/01-简介与安装.md)
+*   [02. 编写与断言](pytest/02-编写与断言.md)
+*   [03. Fixture 固件](pytest/03-Fixture固件.md)
+*   [04. 参数化测试](pytest/04-参数化测试.md)
+*   [05. 标记与配置](pytest/05-标记与配置.md)
+*   [06. 实战：测试 FastAPI](pytest/06-实战：测试FastAPI.md)
+
 ## ✨ 教程特色
 
 *   🇨🇳 **全中文编写**：通俗易懂，贴合国内开发者习惯。
